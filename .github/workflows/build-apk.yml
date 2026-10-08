@@ -8,29 +8,35 @@ on:
 
 jobs:
   build:
+    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js 22
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: Setup Java
+      - name: Check Node and npm
+        run: |
+          node --version
+          npm --version
+
+      - name: Setup Java 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
+          cache: gradle
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build web application
-        run: npm run build
-        continue-on-error: true
+      - name: Check Capacitor
+        run: npx cap --version
 
       - name: Sync Capacitor Android
         run: npx cap sync android
@@ -38,12 +44,13 @@ jobs:
       - name: Make Gradle executable
         run: chmod +x android/gradlew
 
-      - name: Build APK
+      - name: Build Debug APK
         working-directory: android
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: absensi-wajah-sman5-apk
+          name: absensi-wajah-sman5
           path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
