@@ -1,0 +1,1 @@
+{"name":"absensi-wajah-sman5","version":"1.0.0","private":true,"scripts":{"build":"mkdir -p www && cp -r frontend/* www/","cap:add":"npx cap add android","cap:sync":"npx cap sync android","cap:open":"npx cap open android"},"dependencies":{"@capacitor/core":"latest","@capacitor/android":"latest"},"devDependencies":{"@capacitor/cli":"latest"}}

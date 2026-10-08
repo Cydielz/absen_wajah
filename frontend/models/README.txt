@@ -1,0 +1,1 @@
+Letakkan model face-api.js berikut di folder ini: tiny_face_detector_model-weights_manifest.json + shard files, face_landmark_68_model-weights_manifest.json + shard files, face_recognition_model-weights_manifest.json + shard files. Model dapat diperoleh dari repositori resmi face-api.js.
